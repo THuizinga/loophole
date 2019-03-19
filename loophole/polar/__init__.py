@@ -481,6 +481,20 @@ class Usb():
             return info
         # end-of-method get_info
 
+        # Test 1: making new API calls
+        def get_disk_space(self, usb_device):
+            """
+            Get disk_space for given USB device.
+
+            :param usb_device: USB device.
+            :return: Array with USB info.
+            """
+            info = dict()
+            info['disk_space'] = self.usb.util.get_descriptor(usb_device, desc_type, desc_index, wIndex = 0)
+            # %04x: format an integer as a lower-case hex string, at least four characters, with leading zeros.
+            print info['disk_space']
+            return info
+        # end-of-method get_info
         def open(self, usb_device):
             """
             Open USB device.
@@ -660,6 +674,19 @@ class Device():
         return usb.get_info(usb_device)
     # end-of-method get_info
 
+
+    # Required for Test 1: making new API calls
+    @staticmethod    
+    def get_disk_space(usb_device):
+        """
+        Reads USB device info from the given usb device.
+
+        :return: Device info dictionary.
+        """
+        usb = Usb()
+        return usb.get_disk_space(usb_device)
+    # end-of-method get_info
+    
     def open(self):
         """
         Connects to the device

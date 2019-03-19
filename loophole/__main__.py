@@ -228,6 +228,22 @@ Usage: info
         print ' '
     # end-of-method do_info
 
+    # Added for Test 1
+    @check_if_device_is_connected
+    def do_disk_space(self, _):
+        """Print connected device disk space info.
+Usage: info
+        """
+        info = Device.get_disk_space(self.device.usb_device)
+        resp = ''.join(chr(c) for c in info['disk_space'])
+        d = pb_device.PbPFtpDiskSpaceResult()
+        d.ParseFromString(resp)
+        print d
+
+        print ' '
+    # end-of-method do_info
+    # end of Test 1
+
     @check_if_device_is_connected
     def do_fuzz(self, _):
         import polar
